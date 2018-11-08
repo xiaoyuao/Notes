@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body >
+<div ng-app="HelloAjax" ng-controller="HelloAjax">
+    <p> <input type="text" ng-model="name"></p>
+    <h1> {{name}}</h1>
+    <h1 id="jQ_h"></h1>
+</div>
+</body>
+<script src="js/common/angular.min.js"></script>
+<script src="js/common/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    var myModule = angular.module("HelloAjax",[]);
+    myModule.controller("HelloAjax",function HelloAjax($scope,$http){
+        $http({
+            method: "POST",
+            url: "/normal",
+           /* headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}, //不加这个参数是payload
+            data:'param=helloworld'   // 这么写 后台接收不用加@requestbody*/
+
+            data:{'param':'helloworld','aa':'bb'}   //后台接收需要加@requestbody
+
+        }).then(function successCallback (rs){
+            $scope.name = rs.data.param;
+        });
+    });
+    $.ajax({
+        url: "/jquery",
+        dataType: "json",
+        type: "post",
+        data: {"param": "jquery ajax"},
+        success: function (data) {
+            console.log(data);
+            $("#jQ_h").html(data.param);
+        },
+        error:function(){
+            alert("error");
+        }
+    });
+</script>
+</html>
