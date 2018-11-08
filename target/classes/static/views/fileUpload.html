@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传</title>
+</head>
+<body>
+  <div>
+      <input id="info" >
+      <input id="files" type="file" readonly  multiple="multiple">
+      <button id="sub">提交</button>
+  </div>
+</body>
+<script src="../js/common/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    $("#sub").click(function(){
+        var files = $('#files')[0].files;
+        var info = $("#info").val();
+        var formData = new FormData();
+        formData.append("info",info);
+        for(var i=0;i<files.length;i++){
+            formData.append("file["+i+"]", files[i]);
+        }
+        $.ajax({
+            url : "../fileController/upload.do",
+            dataType : "json",
+            type : "post",
+            data:formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success : function(data) {
+
+            }
+        });
+    })
+</script>
+</html>
