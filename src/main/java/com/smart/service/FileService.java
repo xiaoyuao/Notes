@@ -26,6 +26,7 @@ public class FileService {
                 //一次遍历所有文件
                 MultipartFile file = multiRequest.getFile(iter.next().toString());
                 System.out.println(file.getName());
+                System.out.println(file.getOriginalFilename());
             }
         }
     }
