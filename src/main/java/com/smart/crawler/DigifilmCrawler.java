@@ -1,6 +1,7 @@
 package com.smart.crawler;
 
 import net.sf.json.JSONObject;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -55,6 +56,20 @@ public class DigifilmCrawler{
                 if("1".equals(code)){
                     HttpGet getKeyHttp = new HttpGet(downloadKeyURL);
                     HttpResponse getRes = httpClient.execute(getKeyHttp);
+
+                  /*  Header[] headers = getRes.getAllHeaders();
+                    boolean success = false;
+                    for(int h=0;h<headers.length;h++){
+                        Header head = headers[h];
+                        if(head.getValue().contains("filename")){
+                            success = true;
+                            break;
+                        }
+                    }
+                    if(!success){
+                       根据head判断是否下载成功   是否出现验证码
+                    }*/
+
                     String html = EntityUtils.toString(getRes.getEntity(),"UTF-8");
                     Document doc = Jsoup.parse(html);
                     Elements trs = doc.select("table").select("tr");
