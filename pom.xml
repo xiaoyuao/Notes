@@ -60,10 +60,10 @@
         <version>2.4</version>
         <classifier>jdk15</classifier>
         <exclusions>
-            <exclusion>
+            <!--<exclusion>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
-            </exclusion>
+            </exclusion>-->
             <exclusion>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
