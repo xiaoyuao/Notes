@@ -2,6 +2,7 @@ package com.smart.tips;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +20,8 @@ public class tips {
         Collections.sort(numberList);
         String numbers = org.apache.commons.lang.StringUtils.join(numberList.toArray(), "/");
         System.out.println(numbers);
+
+        System.out.println(new Date());
     }
 
 
