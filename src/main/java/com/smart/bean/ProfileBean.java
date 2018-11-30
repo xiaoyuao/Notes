@@ -1,6 +1,6 @@
 package com.smart.bean;
 
-import groovy.util.logging.Slf4j;
+//import groovy.util.logging.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
  */
 @Profile("dev")//支持数组:@Profile({"dev","test"})
 @Configuration
-@Slf4j
+//@Slf4j
 public class ProfileBean {
         @PostConstruct
         public void init() {
