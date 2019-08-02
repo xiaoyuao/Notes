@@ -80,15 +80,52 @@ public class CommonUtil {
         }
     }
 
-    public static void main(String[] args) {
-        CommonUtil c = new CommonUtil();
-        c.mapCompare();
+    public void listCompare(){
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        List<CPLInfo> cplInfoList = new ArrayList<>();
+        try {
+            CPLInfo ci1 = new CPLInfo();
+            ci1.setUUID("1");
+            ci1.setUploadTime(sf.parse("2018-01-01"));
+            cplInfoList.add(ci1);
+
+            CPLInfo ci2 = new CPLInfo();
+            ci2.setUUID("2");
+            ci2.setUploadTime(sf.parse("2017-01-01"));
+            cplInfoList.add(ci2);
+
+            CPLInfo ci3 = new CPLInfo();
+            ci3.setUUID("3");
+            ci3.setUploadTime(sf.parse("2019-01-01"));
+            cplInfoList.add(ci3);
+
+            CPLInfo ci4 = new CPLInfo();
+            ci4.setUUID("4");
+            ci4.setUploadTime(sf.parse("2020-01-01"));
+            cplInfoList.add(ci4);
+
+            Collections.sort(cplInfoList);
+
+            cplInfoList.stream().forEach(e-> System.out.println(e.getUploadTime()));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 
 
 
-    private  class CPLInfo{
+    public static void main(String[] args) {
+        CommonUtil c = new CommonUtil();
+     //   c.mapCompare();
+
+        c.listCompare();
+    }
+
+
+
+
+    private  class CPLInfo implements Comparable<CPLInfo>{
         private String UUID;
         private Date uploadTime;
 
@@ -107,6 +144,29 @@ public class CommonUtil {
         public void setUploadTime(Date uploadTime) {
             this.uploadTime = uploadTime;
         }
+
+        @Override
+        public int compareTo(CPLInfo c) {
+            //  CPLInfo c = (CPLInfo)o;
+            if(this.getUploadTime() == null && c.getUploadTime() == null){
+                return 0;
+            }
+            if(this.getUploadTime() == null){
+                return 1;
+            }
+            if(c.getUploadTime() == null){
+                return -1;
+            }
+            if(this.getUploadTime().before(c.getUploadTime())){
+                return 1;
+            }
+            if(this.getUploadTime().after(c.getUploadTime())){
+                return -1;
+            }
+            return 0;
+        }
+
+
     }
 
 }
